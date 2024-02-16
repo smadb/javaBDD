@@ -9,9 +9,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-
-        mainWindow mainWindow = new mainWindow();
-
+        connexion connexion = new connexion(null);
     }
 
 

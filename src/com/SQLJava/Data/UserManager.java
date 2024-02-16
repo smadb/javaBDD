@@ -66,6 +66,33 @@ public class UserManager {
         }
         return verif;
     }
+    public User findUser(String mail){
+        User verif = new User();
+        try {
+            Statement stm = connexion.createStatement();
+            //System.out.println("*Connection started on "+connexion.toString()+"*");
+            String requete = "SELECT id,nom,prenom,email,password FROM users WHERE email=?";
+
+            PreparedStatement preparedStatement = connexion.prepareStatement(requete);
+            preparedStatement.setString(1,mail);
+            ResultSet rs = preparedStatement.executeQuery();
+
+
+            while(rs.next()){
+                if(rs.getString(1)!=null){
+                    verif.setId(rs.getInt("id"));
+                    verif.setEmail(rs.getString("email"));
+                    verif.setNom(rs.getString("nom"));
+                    verif.setPrenom(rs.getString("prenom"));
+                    verif.setPassword(rs.getString("password"));
+                }
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
+        return verif;
+    }
 
     public static User updateUser(User user){
         User updatedUser = new User();
